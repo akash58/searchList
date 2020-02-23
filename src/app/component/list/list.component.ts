@@ -1,14 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 
-interface Country {
-  name: string;
-  email: string;
-  salary: number;
-}
-
-const empDetails: Country[] = JSON.parse(localStorage.getItem('empData'));
-
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -19,9 +11,6 @@ export class ListComponent implements OnInit {
   searchText;
   empList: any;
   objectsFromEmpDataStorage: any;
-  page = 1;
-  pageSize = 5;
-  collectionSize = empDetails.length;
 
   constructor(private router: Router,) { }
 
@@ -46,12 +35,10 @@ export class ListComponent implements OnInit {
 
   lessThanData(){
     this.objectsFromEmpDataStorage = [];
-    console.log(this.objectsFromEmpDataStorage, 'objectsFromEmpDataStorage less than')
-    for (const value of empDetails) {
-      console.log(value, 'less than')
+    let allEmpData = JSON.parse(this.empList);
+    for (const value of allEmpData) {
       if(value.salary < this.searchText) {
         this.objectsFromEmpDataStorage.push(value);
-        console.log(this.objectsFromEmpDataStorage, 'inside id')
       }
     }
   }
@@ -65,10 +52,4 @@ export class ListComponent implements OnInit {
       }
     }
   }
-
-  get empAllDatas() {
-    return empDetails
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-  }
-
 }

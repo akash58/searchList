@@ -35,11 +35,8 @@
         </tr>
       </thead>
       <tbody>
-        <!-- <tr>
-          <td colspan="3" class="text-center">{{noDataDisplay}}</td>
-        </tr> -->
         <tr
-          *ngFor="let empData of empAllDatas"
+          *ngFor="let empData of objectsFromEmpDataStorage"
         >
           <td>{{ empData.name }}</td>
           <td>{{ empData.email }}</td>
@@ -47,17 +44,6 @@
         </tr>
       </tbody>
     </table>
-
-    <div class="d-flex justify-content-between p-2">
-      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
-      </ngb-pagination>
-    
-      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
-        <option [ngValue]="5">5 items per page</option>
-        <option [ngValue]="10">10 items per page</option>
-        <option [ngValue]="15">15 items per page</option>
-      </select>
-    </div>
   </div>
   <button
     type="button"
